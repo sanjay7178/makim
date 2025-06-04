@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [1.26.1](https://github.com/makim-org/makim/compare/1.26.0...1.26.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* **ci:** Fix the CI trigger for tags ([#198](https://github.com/makim-org/makim/issues/198)) ([3dc7e4d](https://github.com/makim-org/makim/commit/3dc7e4d27e1c337a909d45baa3babe1a0074c7c5))
+
 # [1.26.0](https://github.com/makim-org/makim/compare/1.25.0...1.26.0) (2025-06-04)
 
 
