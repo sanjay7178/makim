@@ -1,0 +1,11 @@
+[unit]
+Description=A tool that helps organize and simplify helper commands using YAML configuration
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/makim
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target
