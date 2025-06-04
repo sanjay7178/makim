@@ -1,6 +1,14 @@
 # Release Notes
 ---
 
+# [1.26.0](https://github.com/makim-org/makim/compare/1.25.0...1.26.0) (2025-06-04)
+
+
+### Features
+
+* Implement failure hook to run tasks after a task fails ([#191](https://github.com/makim-org/makim/issues/191)) ([728970a](https://github.com/makim-org/makim/commit/728970a0a7b0f7a29e2c3d28d927e9bbe15ab4fb))
+* **packaging:** add support for building multiple package formats ([#197](https://github.com/makim-org/makim/issues/197)) ([c3c3c07](https://github.com/makim-org/makim/commit/c3c3c07e7ff2473d29a3ce20d955fc9a689d632f))
+
 # [1.25.0](https://github.com/osl-incubator/makim/compare/1.24.0...1.25.0) (2025-04-02)
 
 
