@@ -1,6 +1,50 @@
 # Release Notes
 ---
 
+# [1.26.0](https://github.com/sanjay7178/makim/compare/1.25.0...1.26.0) (2025-06-04)
+
+
+### Bug Fixes
+
+* Add condition to skip release creation on pull requests ([dcb400a](https://github.com/sanjay7178/makim/commit/dcb400a7e01da2c21e8246ba711bfa9b1f128227))
+* Add error handling for container restart in setup task ([1d9c70a](https://github.com/sanjay7178/makim/commit/1d9c70adafb7971e092e18ac7c8ced79114a49d1))
+* Add error handling for image pulling in setup task ([58fa962](https://github.com/sanjay7178/makim/commit/58fa9624f751ff421e310bbfbd56ff8ea0f2963a))
+* Add Ruby installation to base dependencies in release workflow ([ff3099b](https://github.com/sanjay7178/makim/commit/ff3099b73ea9d34c078571fd5f12cddb942bbdcc))
+* Add tag trigger for release workflow ([791cdc5](https://github.com/sanjay7178/makim/commit/791cdc5fd5cd0e2c36e9d02c24e2644ccc4e4f14))
+* Add verification step for FPM installation and clean up PATH setup ([1b057f7](https://github.com/sanjay7178/makim/commit/1b057f7a82ba761c24ef4e761870f993d2e6ddbd))
+* **ci:** Fix the CI trigger for tags ([#198](https://github.com/sanjay7178/makim/issues/198)) ([3dc7e4d](https://github.com/sanjay7178/makim/commit/3dc7e4d27e1c337a909d45baa3babe1a0074c7c5))
+* Comment out APK packaging steps in release workflow ([800efc8](https://github.com/sanjay7178/makim/commit/800efc827e8b923b1de5a8e43c39d1c1074b4d3c))
+* Correct option flag from --allows-untrusted to --allow-untrusted in apk.sh ([697e89f](https://github.com/sanjay7178/makim/commit/697e89f2463a65ae5ddc553510164081d38bde04))
+* Enhance APT install step to include bsdtar and add repository check ([e710b9b](https://github.com/sanjay7178/makim/commit/e710b9b8c503a152de88d03bf1731e1ec960c25d))
+* Enhance error handling in setup task for image building ([59ce2c1](https://github.com/sanjay7178/makim/commit/59ce2c1a0e5e74cd6dcf10c5599492ac9c0cd90c))
+* Remove deprecated --allow-untrusted option from fpm command in apk.sh ([f91269c](https://github.com/sanjay7178/makim/commit/f91269c1e7a22c5dc21ffe4e77f133bb15dbe3d2))
+* Remove redundant environment activation step in Python venv setup ([1dbfbcc](https://github.com/sanjay7178/makim/commit/1dbfbcc2b60f7e58f4275786c6a545b33343abf6))
+* Remove redundant environment variable setup for FPM installation ([577a0eb](https://github.com/sanjay7178/makim/commit/577a0eb9593517e3b659951ae49225cd792f371d))
+* Remove redundant package creation step in release workflow ([3f9b4ed](https://github.com/sanjay7178/makim/commit/3f9b4ed7ccaa25fdb328d22239924e000383535b))
+* Replace Miniconda setup with Python virtual environment for dependency management ([e2b1a7b](https://github.com/sanjay7178/makim/commit/e2b1a7b393912b22a6b9241697c7d814e2a8f9b8))
+* Simplify FPM installation by removing redundant PATH setup and adding ruby-erb dependency ([5b70402](https://github.com/sanjay7178/makim/commit/5b70402df193654dca0d43e8e84f853fe4db5036))
+* Update APT install step to include bsdtar for packaging dependencies ([187731b](https://github.com/sanjay7178/makim/commit/187731b8e3c6c7eb0983ae230e6a74d1fbef7f69))
+* Update APT install step to remove bsdtar and add build-pacman job ([83c0176](https://github.com/sanjay7178/makim/commit/83c01765ce91d0efe8052ad2ba87a7739036e1a2))
+* Update command for building Python standalone binary to use correct packaging target ([6099e93](https://github.com/sanjay7178/makim/commit/6099e93cf20a74d8c3ad499f0e84d202117bb623))
+* Update containers-sugar version to 1.17.0 for smoke tests ([c919bb4](https://github.com/sanjay7178/makim/commit/c919bb45a7660647826956537ac16737cfa2b702))
+* Update dependencies path in packaging scripts to use /usr/share/makim ([7cfe0c7](https://github.com/sanjay7178/makim/commit/7cfe0c782697c4bad34fab9cdcc44977eb94e1b9))
+* Update FPM installation to ensure proper PATH setup and accessibility ([edaa5fa](https://github.com/sanjay7178/makim/commit/edaa5fac2f218fcaf4f0b4de7ad0401dd3db6093))
+* Update FPM installation to set GEM_HOME and persist PATH across steps ([c5ec2fb](https://github.com/sanjay7178/makim/commit/c5ec2fb6f5212268a1d5f01270e7e777221fcf8d))
+* Update job defaults to ensure consistent shell execution in release workflow ([3e1c843](https://github.com/sanjay7178/makim/commit/3e1c84348aa2372bc0894ff4ee6bee592d7a55a4))
+* Update pacman base dependencies and enhance Python environment setup ([5957f27](https://github.com/sanjay7178/makim/commit/5957f27b936ff1e709987b6d0f5363f54406b13f))
+* Update path for postinstall script to ensure correct execution ([786aae9](https://github.com/sanjay7178/makim/commit/786aae96281f8671eb815fd3b3eabb209fc2af0c))
+
+
+### Features
+
+* Add build-pacman script to create and manage Python virtual environment ([7e97a10](https://github.com/sanjay7178/makim/commit/7e97a1076f96d56b0229a29b6a492a75829095bd))
+* Add step to build Python standalone binary and set PyPI package version in environment ([564ae1b](https://github.com/sanjay7178/makim/commit/564ae1b2402887b7857c43db0bc9c74fdee9f773))
+* Implement failure hook to run tasks after a task fails ([#191](https://github.com/sanjay7178/makim/issues/191)) ([728970a](https://github.com/sanjay7178/makim/commit/728970a0a7b0f7a29e2c3d28d927e9bbe15ab4fb))
+* **packaging:** Add scripts and configurations for building various package formats (deb, rpm, apk, snap, pacman, osxpkg) ([432647b](https://github.com/sanjay7178/makim/commit/432647b708849bc74c1e4dbdc5d2c33758d8865d))
+* **packaging:** add support for building multiple package formats ([#197](https://github.com/sanjay7178/makim/issues/197)) ([c3c3c07](https://github.com/sanjay7178/makim/commit/c3c3c07e7ff2473d29a3ce20d955fc9a689d632f))
+* Rename step to clarify dependency installation using Poetry ([8696a59](https://github.com/sanjay7178/makim/commit/8696a599315e80200582c484888839843f846f42))
+* Update package naming and service description for clarity ([0788e29](https://github.com/sanjay7178/makim/commit/0788e29bcd6a9f2dd0adb9697b237036c47b25a9))
+
 ## [1.26.1](https://github.com/makim-org/makim/compare/1.26.0...1.26.1) (2025-06-04)
 
 
