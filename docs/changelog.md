@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [1.26.2](https://github.com/makim-org/makim/compare/1.26.1...1.26.2) (2025-06-10)
+
+
+### Bug Fixes
+
+* Fix sync between semantic release and packages release ([#199](https://github.com/makim-org/makim/issues/199)) ([3a9e374](https://github.com/makim-org/makim/commit/3a9e3749717f33bab7b23d4f0292b861e53c643d))
+
 ## [1.26.1](https://github.com/makim-org/makim/compare/1.26.0...1.26.1) (2025-06-04)
 
 
