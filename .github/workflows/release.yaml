@@ -3,7 +3,7 @@ name: Release
 on:
   workflow_dispatch:
   push:
-    branches: [main, "fix/artifact-releases"]
+    branches: [main]
     tags:
       - "*.*.*"
   pull_request:
@@ -226,8 +226,8 @@ jobs:
         id: get-version
         run: |
           VERSION=$(awk -F'"' '/version = /{print $2}' ./pyproject.toml | head -1)
-          echo "version=v$VERSION" >> $GITHUB_OUTPUT
-          echo "Project version: v$VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Project version: $VERSION"
 
       - name: Get the latest release tag
         id: get-tag
