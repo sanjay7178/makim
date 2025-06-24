@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [1.1.0](https://github.com/sanjay7178/makim/compare/1.0.3...1.1.0) (2025-06-24)
+
+
+### Features
+
+* add version argument to packaging scripts for better version control ([81868dd](https://github.com/sanjay7178/makim/commit/81868dd215bd21e124f8a204134f3c3b1e05e764))
+
 ## [1.0.3](https://github.com/sanjay7178/makim/compare/1.0.2...1.0.3) (2025-06-24)
 
 
