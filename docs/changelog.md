@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [1.0.3](https://github.com/sanjay7178/makim/compare/1.0.2...1.0.3) (2025-06-24)
+
+
+### Bug Fixes
+
+* update version fetching method in packaging scripts ([0450da9](https://github.com/sanjay7178/makim/commit/0450da93ee3e385b02569391f362b1899446ca36))
+
 ## [1.0.2](https://github.com/sanjay7178/makim/compare/1.0.1...1.0.2) (2025-06-24)
 
 
