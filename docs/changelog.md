@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [1.1.1](https://github.com/sanjay7178/makim/compare/1.1.0...1.1.1) (2025-06-24)
+
+
+### Bug Fixes
+
+* streamline version fetching by introducing a dedicated step to get the newest tag ([9eab458](https://github.com/sanjay7178/makim/commit/9eab4586f06d5ccc301d98b1c0901f6605ed18d8))
+
 # [1.1.0](https://github.com/sanjay7178/makim/compare/1.0.3...1.1.0) (2025-06-24)
 
 
