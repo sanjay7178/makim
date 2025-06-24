@@ -655,8 +655,7 @@ groups:
             default: "1.0.0"
         dir: .
         run: |
-          export VERSION='${{ args.version }}'
-          bash ./packaging/scripts/rpm.sh $VERSION
+          bash ./packaging/scripts/rpm.sh ${{ args.version }}
 
       build_apk:
         help: Build a apk package
@@ -667,8 +666,7 @@ groups:
             default: "1.0.0"
         dir: .
         run: |
-          export VERSION='${{ args.version }}'
-          bash ./packaging/scripts/apk.sh $VERSION
+          bash ./packaging/scripts/apk.sh ${{ args.version }}
 
       build_snap:
         help: Build a snap package
@@ -679,8 +677,7 @@ groups:
             default: "1.0.0"
         dir: .
         run: |
-          export VERSION='${{ args.version }}'
-          bash ./packaging/scripts/snap.sh $VERSION
+          bash ./packaging/scripts/snap.sh  ${{ args.version }}
 
       build_pacman:
         help: Build a pacman package
@@ -691,8 +688,7 @@ groups:
             default: "1.0.0"
         dir: .
         run: |
-          export VERSION='${{ args.version }}'
-          bash ./packaging/scripts/pacman.sh $VERSION
+          bash ./packaging/scripts/pacman.sh  ${{ args.version }}
 
       set_env:
         help: Set pypi package to current environment variable
