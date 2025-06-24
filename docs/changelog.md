@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [1.2.0](https://github.com/sanjay7178/makim/compare/1.1.3...1.2.0) (2025-06-24)
+
+
+### Features
+
+* add step to retrieve current poetry version in release workflow ([8332e66](https://github.com/sanjay7178/makim/commit/8332e667e4e359d3df2f58bfaaeecf0b20ba432c))
+
 ## [1.1.3](https://github.com/sanjay7178/makim/compare/1.1.2...1.1.3) (2025-06-24)
 
 
