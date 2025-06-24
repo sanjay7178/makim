@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dynamically fetch the version from pyproject.toml
-VERSION=$(git tag --sort=-creatordate | head -n1)
+VERSION=$1
 MAKIM_BIN=$(ls ./dist/makim-linux-*)
 
 echo "Building Debian package for Makim version: $VERSION"

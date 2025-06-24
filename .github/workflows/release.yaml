@@ -136,15 +136,15 @@ jobs:
 
       - name: Package DEB for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_deb
+          makim --verbose packaging.build_deb --version $(git tag --sort=-creatordate | head -n1)
 
       - name: Package RPM for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_rpm
+          makim --verbose packaging.build_rpm --version $(git tag --sort=-creatordate | head -n1)
 
       - name: Package Snap for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_snap
+          makim --verbose packaging.build_snap --version $(git tag --sort=-creatordate | head -n1)
 
       - name: Upload artifacts (non-pacman)
         uses: actions/upload-artifact@v4
@@ -206,7 +206,7 @@ jobs:
       - name: Package pacman for ${{ matrix.arch }}
         run: |
           source /venv/bin/activate
-          makim --verbose packaging.build_pacman
+          makim --verbose packaging.build_pacman --version $(git tag --sort=-creatordate | head -n1)
 
       - name: Upload pacman artifacts
         uses: actions/upload-artifact@v4
