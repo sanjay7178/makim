@@ -53,6 +53,11 @@ groups:
         help: Run semantic release on CI
         run: ${{ vars.app }} --ci
 
+      version:
+        help: Get the current version of the project
+        run: |
+          poetry version --short
+
       dry:
         help: Run semantic release in dry-run mode
         run: |

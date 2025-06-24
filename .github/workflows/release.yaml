@@ -22,6 +22,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
 
     defaults:
       run:
@@ -54,6 +56,13 @@ jobs:
         run: |
           poetry config pypi-token.pypi ${PYPI_TOKEN}
           makim --verbose release.ci
+
+      - name: Get the current poetry version
+        id: get-version
+        run: |
+          poetry_version=$(poetry version --short)
+          echo "version=$poetry_version" >> $GITHUB_OUTPUT
+          echo "Project version: $poetry_version"
 
       - name: Generate documentation with changes from semantic-release
         if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -127,13 +136,6 @@ jobs:
           sudo apt-get install -y software-properties-common
           sudo apt-get install -y rpm snapd
 
-      - name: Get version from pyproject.toml
-        id: get-version
-        run: |
-          VERSION=$(awk -F'"' '/version = /{print $2}' ./pyproject.toml | head -1)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Project version: $VERSION"
-
       - name: Make scripts executable
         run: chmod +x packaging/scripts/postinstall.sh
 
@@ -143,15 +145,15 @@ jobs:
 
       - name: Package DEB for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_deb --version ${{ steps.get-version.outputs.version }}
+          makim --verbose packaging.build_deb --version ${{ needs.release.outputs.version }}
 
       - name: Package RPM for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_rpm --version ${{ steps.get-version.outputs.version }}
+          makim --verbose packaging.build_rpm --version ${{ needs.release.outputs.version }}
 
       - name: Package Snap for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_snap --version ${{ steps.get-version.outputs.version }}
+          makim --verbose packaging.build_snap --version ${{ needs.release.outputs.version }}
 
       - name: Upload artifacts (non-pacman)
         uses: actions/upload-artifact@v4
@@ -205,13 +207,6 @@ jobs:
       - name: Make scripts executable
         run: chmod +x packaging/scripts/postinstall.sh
 
-      - name: Get version from pyproject.toml
-        id: get-version
-        run: |
-          VERSION=$(awk -F'"' '/version = /{print $2}' ./pyproject.toml | head -1)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Project version: $VERSION"
-
       - name: build python standalone binary
         run: |
           source /venv/bin/activate
@@ -220,7 +215,7 @@ jobs:
       - name: Package pacman for ${{ matrix.arch }}
         run: |
           source /venv/bin/activate
-          makim --verbose packaging.build_pacman --version ${{ steps.get-version.outputs.version }}
+          makim --verbose packaging.build_pacman --version ${{ needs.release.outputs.version }}
 
       - name: Upload pacman artifacts
         uses: actions/upload-artifact@v4
