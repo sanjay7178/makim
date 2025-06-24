@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [1.1.2](https://github.com/sanjay7178/makim/compare/1.1.1...1.1.2) (2025-06-24)
+
+
+### Bug Fixes
+
+* simplify version passing in packaging scripts by removing unnecessary export ([8606ac7](https://github.com/sanjay7178/makim/commit/8606ac7011a63b6caa6934fef9202824a4b50549))
+
 ## [1.1.1](https://github.com/sanjay7178/makim/compare/1.1.0...1.1.1) (2025-06-24)
 
 
