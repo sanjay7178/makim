@@ -229,22 +229,30 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Project version: $VERSION"
 
-      - name: Get the latest release tag
+      - name: Get the newest tag
         id: get-tag
         run: |
-          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "none")
+          TAG=$(git tag --sort=-creatordate | head -n1)
           echo "tag=$TAG" >> $GITHUB_OUTPUT
-          echo "Latest tag: $TAG"
+          echo "Newest tag: $TAG"
 
-      - name: Check if tag matches version
+      - name: Check if tag is greater than version
         id: check-version
         run: |
-          if [ "${{ steps.get-tag.outputs.tag }}" = "${{ steps.get-version.outputs.version }}" ]; then
+          # Remove any 'v' prefix if present
+          TAG="${{ steps.get-tag.outputs.tag }}"
+          TAG=${TAG#v}
+          VERSION="${{ steps.get-version.outputs.version }}"
+          VERSION=${VERSION#v}
+
+          # Compare versions
+          if [ "$(printf '%s\n' "$VERSION" "$TAG" | sort -V | head -n1)" = "$VERSION" ] && [ "$TAG" != "$VERSION" ]; then
+            # TAG > VERSION (Tag is strictly greater than version)
             echo "match=true" >> $GITHUB_OUTPUT
-            echo "Tag matches version - proceeding with release"
+            echo "Tag ${{ steps.get-tag.outputs.tag }} is greater than version ${{ steps.get-version.outputs.version }} - proceeding with release"
           else
             echo "match=false" >> $GITHUB_OUTPUT
-            echo "Tag (${{ steps.get-tag.outputs.tag }}) does not match version (${{ steps.get-version.outputs.version }}) - skipping release"
+            echo "Tag ${{ steps.get-tag.outputs.tag }} is not greater than version ${{ steps.get-version.outputs.version }} - skipping release"
             exit 0
           fi
 
