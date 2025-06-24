@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [1.0.1](https://github.com/sanjay7178/makim/compare/1.0.0...1.0.1) (2025-06-24)
+
+
+### Bug Fixes
+
+* testing ([b5729b2](https://github.com/sanjay7178/makim/commit/b5729b2e68dab286d81b9ce3ffe54788fa67a521))
+
 # 1.0.0 (2025-06-24)
 
 
