@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [1.1.3](https://github.com/sanjay7178/makim/compare/1.1.2...1.1.3) (2025-06-24)
+
+
+### Bug Fixes
+
+* update version retrieval in release workflow to use pyproject.toml ([8442c16](https://github.com/sanjay7178/makim/commit/8442c16402127d6da1e075245f5bac6303c50e84))
+
 ## [1.1.2](https://github.com/sanjay7178/makim/compare/1.1.1...1.1.2) (2025-06-24)
 
 
