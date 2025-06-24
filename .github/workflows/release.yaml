@@ -71,6 +71,7 @@ jobs:
         uses: mxschmitt/action-tmate@v3
 
   build:
+    needs: release
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -156,6 +157,7 @@ jobs:
             # *.apk
 
   build-pacman:
+    needs: release
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
