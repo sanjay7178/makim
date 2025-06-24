@@ -1,5 +1,5 @@
 [project]
-name = "saisanjay-test"
+name = "makim"
 version = "1.26.2"  # semantic-release
 description = "A tool that helps organize and simplify helper commands using YAML configuration"
 authors = [
