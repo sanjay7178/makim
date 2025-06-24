@@ -233,40 +233,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get version from pyproject.toml
-        id: get-version
-        run: |
-          VERSION=$(awk -F'"' '/version = /{print $2}' ./pyproject.toml | head -1)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Project version: $VERSION"
-
-      - name: Get the newest tag
-        id: get-tag
-        run: |
-          TAG=$(git tag --sort=-creatordate | head -n1)
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
-          echo "Newest tag: $TAG"
-
-      - name: Check if tag is greater than version
-        id: check-version
-        run: |
-          # Remove any 'v' prefix if present
-          TAG="${{ steps.get-tag.outputs.tag }}"
-          TAG=${TAG#v}
-          VERSION="${{ steps.get-version.outputs.version }}"
-          VERSION=${VERSION#v}
-
-          # Compare versions
-          if [ "$(printf '%s\n' "$VERSION" "$TAG" | sort -V | head -n1)" = "$VERSION" ] && [ "$TAG" != "$VERSION" ]; then
-            # TAG > VERSION (Tag is strictly greater than version)
-            echo "match=true" >> $GITHUB_OUTPUT
-            echo "Tag ${{ steps.get-tag.outputs.tag }} is greater than version ${{ steps.get-version.outputs.version }} - proceeding with release"
-          else
-            echo "match=false" >> $GITHUB_OUTPUT
-            echo "Tag ${{ steps.get-tag.outputs.tag }} is not greater than version ${{ steps.get-version.outputs.version }} - skipping release"
-            exit 0
-          fi
-
       - name: Download all artifacts
         if: steps.check-version.outputs.match == 'true'
         uses: actions/download-artifact@v4
@@ -287,7 +253,7 @@ jobs:
         if: steps.check-version.outputs.match == 'true'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.get-tag.outputs.tag }}
+          tag_name: ${{ needs.release.outputs.version }}
           files: release_files/*
           append_body: true
         env:
