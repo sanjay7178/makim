@@ -234,23 +234,23 @@ jobs:
           fetch-depth: 0
 
       - name: Download all artifacts
-        if: steps.check-version.outputs.match == 'true'
+        if: needs.release.outputs.version != ''
         uses: actions/download-artifact@v4
         with:
           path: packages
 
       - name: Display structure of downloaded files
-        if: steps.check-version.outputs.match == 'true'
+        if: needs.release.outputs.version != ''
         run: ls -R packages
 
       - name: Flatten directory structure
-        if: steps.check-version.outputs.match == 'true'
+        if: needs.release.outputs.version != ''
         run: |
           mkdir -p release_files
           find packages -type f -name "*.deb" -o -name "*.rpm" -o -name "*.snap" -o -name "*.pkg.tar.xz" | xargs -I {} cp {} release_files/
 
       - name: Upload artifacts to existing release
-        if: steps.check-version.outputs.match == 'true'
+        if: needs.release.outputs.version != ''
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.release.outputs.version }}
