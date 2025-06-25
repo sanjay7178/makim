@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     tags:
-      - '*.*.*'
+      - "*.*.*"
   pull_request:
     branches: [main]
 
@@ -22,6 +22,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
 
     defaults:
       run:
@@ -55,6 +57,13 @@ jobs:
           poetry config pypi-token.pypi ${PYPI_TOKEN}
           makim --verbose release.ci
 
+      - name: Get the current poetry version
+        id: get-version
+        run: |
+          poetry_version=$(poetry version --short)
+          echo "version=$poetry_version" >> $GITHUB_OUTPUT
+          echo "Project version: $poetry_version"
+
       - name: Generate documentation with changes from semantic-release
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: makim --verbose docs.build
@@ -71,6 +80,7 @@ jobs:
         uses: mxschmitt/action-tmate@v3
 
   build:
+    needs: release
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -135,15 +145,15 @@ jobs:
 
       - name: Package DEB for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_deb
+          makim --verbose packaging.build_deb --version ${{ needs.release.outputs.version }}
 
       - name: Package RPM for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_rpm
+          makim --verbose packaging.build_rpm --version ${{ needs.release.outputs.version }}
 
       - name: Package Snap for ${{ matrix.arch }}
         run: |
-          makim --verbose packaging.build_snap
+          makim --verbose packaging.build_snap --version ${{ needs.release.outputs.version }}
 
       - name: Upload artifacts (non-pacman)
         uses: actions/upload-artifact@v4
@@ -156,6 +166,7 @@ jobs:
             # *.apk
 
   build-pacman:
+    needs: release
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
@@ -204,7 +215,7 @@ jobs:
       - name: Package pacman for ${{ matrix.arch }}
         run: |
           source /venv/bin/activate
-          makim --verbose packaging.build_pacman
+          makim --verbose packaging.build_pacman --version ${{ needs.release.outputs.version }}
 
       - name: Upload pacman artifacts
         uses: actions/upload-artifact@v4
@@ -214,32 +225,36 @@ jobs:
             *.pkg.tar.xz
 
   package-release:
-    needs: [build, build-pacman]
+    needs: [release, build, build-pacman]
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     steps:
-      - name: Get the version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Download all artifacts
+        if: needs.release.outputs.version != ''
         uses: actions/download-artifact@v4
         with:
           path: packages
 
       - name: Display structure of downloaded files
+        if: needs.release.outputs.version != ''
         run: ls -R packages
 
       - name: Flatten directory structure
+        if: needs.release.outputs.version != ''
         run: |
           mkdir -p release_files
-          # find packages -type f -name "*.deb" -o -name "*.rpm" -o -name "*.snap" -o -name "*.apk" -o -name "*.pkg.tar.xz" | xargs -I {} cp {} release_files/
           find packages -type f -name "*.deb" -o -name "*.rpm" -o -name "*.snap" -o -name "*.pkg.tar.xz" | xargs -I {} cp {} release_files/
 
-      - name: Create Release
+      - name: Upload artifacts to existing release
+        if: needs.release.outputs.version != ''
         uses: softprops/action-gh-release@v1
-        if: ${{ github.ref_type == 'tag' }}
         with:
+          tag_name: ${{ needs.release.outputs.version }}
           files: release_files/*
-          draft: false
-          prerelease: false
+          append_body: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
