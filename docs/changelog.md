@@ -1,20 +1,12 @@
 # Release Notes
 ---
 
-# [1.3.0](https://github.com/sanjay7178/makim/compare/1.2.0...1.3.0) (2025-07-01)
+## [1.26.3](https://github.com/makim-org/makim/compare/1.26.2...1.26.3) (2025-06-25)
 
 
 ### Bug Fixes
 
-* update artifact handling conditions in release workflow ([0569fc8](https://github.com/sanjay7178/makim/commit/0569fc8838f4ab087f943829f9b6e827192b0878))
-* update project name from saisanjay-test to makim in pyproject.toml ([042b7b7](https://github.com/sanjay7178/makim/commit/042b7b71bfc88e269329e627d5f74e7ade3d174b))
-* update project version to 1.26.2 in pyproject.toml ([ab138b9](https://github.com/sanjay7178/makim/commit/ab138b9afbb0c7fd872d68ea4ff1d15f39ffeecc))
-* update version to 1.26.2 in __init__.py ([e37640b](https://github.com/sanjay7178/makim/commit/e37640b844fde471724eb68ef3342126ff621e73))
-
-
-### Features
-
-* add architecture parameter to packaging scripts for better flexibility ([d08a164](https://github.com/sanjay7178/makim/commit/d08a164c1b609e7292852eed4df76b409dbbb2d8))
+* Artifacts push into makim releases ([#200](https://github.com/makim-org/makim/issues/200)) ([3aef31a](https://github.com/makim-org/makim/commit/3aef31ab34a9b483da25bd6212feba8a1433080f))
 
 ## [1.26.2](https://github.com/makim-org/makim/compare/1.26.1...1.26.2) (2025-06-10)
 
