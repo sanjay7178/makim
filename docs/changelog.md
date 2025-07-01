@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [1.26.3](https://github.com/makim-org/makim/compare/1.26.2...1.26.3) (2025-06-25)
+
+
+### Bug Fixes
+
+* Artifacts push into makim releases ([#200](https://github.com/makim-org/makim/issues/200)) ([3aef31a](https://github.com/makim-org/makim/commit/3aef31ab34a9b483da25bd6212feba8a1433080f))
+
 ## [1.26.2](https://github.com/makim-org/makim/compare/1.26.1...1.26.2) (2025-06-10)
 
 
